@@ -1,24 +1,60 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Home from '../views/Home.vue'
+import Layout from '../views/Layout.vue'
+
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    name: 'Layout',
+    component: Layout,
+    children: [
+      {
+        path: '',
+        name: 'Home',
+        component: Home,
+        meta: {
+          isLogin: false
+        }
+      },
+      {
+        path: 'news',
+        name: 'News',
+        component: () => import("../views/News.vue"),
+        meta: {
+          isLogin: true
+        }
+      },
+      {
+        path: 'about',
+        name: 'About',
+        component: () => import("../views/About.vue"),
+        meta: {
+          isLogin: true
+        }
+      },
+    ]
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
   }
 ]
+
+// 路由全局守卫
+router.beforeEach((to, from, next) => {
+  // 登录验证: 1.进入路由界面是否需要登录 2.再验证是否登录
+  if (to.meta.isLogin) { // true需要登录
+
+  } else {
+    // 不需要登录,直接放行
+    next()
+  }
+})
 
 const router = new VueRouter({
   routes
