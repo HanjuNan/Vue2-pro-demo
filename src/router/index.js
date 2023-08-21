@@ -44,20 +44,29 @@ const routes = [
     component: () => import('../views/Login.vue')
   }
 ]
+const router = new VueRouter({
+  routes
+})
 
-// 路由全局守卫
+
 router.beforeEach((to, from, next) => {
+  let token = true;
   // 登录验证: 1.进入路由界面是否需要登录 2.再验证是否登录
   if (to.meta.isLogin) { // true需要登录
-
+      // 再验证是否登录 假设已经登录
+      
+      if (token) {
+          next()
+      } else {
+        // 没有登录,跳转到登录界面
+        next("/login")
+      }
   } else {
     // 不需要登录,直接放行
     next()
   }
 })
 
-const router = new VueRouter({
-  routes
-})
+
 
 export default router

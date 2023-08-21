@@ -2,11 +2,10 @@
   <div class="nav">
   
     <el-menu
-      :default-active="activeIndex"
+      :default-active="$route.path"
       router
       class="el-menu-demo"
       mode="horizontal"
-      @select="handleSelect"
       background-color="#545c64"
       text-color="#fff"
       active-text-color="#ffd04b"
@@ -31,10 +30,11 @@ export default {
       activeIndex: "/",
     };
   },
+  mounted() {
+    // this.activeIndex = this.$route.path;
+  },
   methods: {
-    handleSelect(key, keyPath) {
-      console.log(key, keyPath);
-    },
+   
   },
 };
 </script>
