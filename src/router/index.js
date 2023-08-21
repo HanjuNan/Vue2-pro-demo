@@ -50,7 +50,7 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  let token = true;
+  let token = false;
   // 登录验证: 1.进入路由界面是否需要登录 2.再验证是否登录
   if (to.meta.isLogin) { // true需要登录
       // 再验证是否登录 假设已经登录
