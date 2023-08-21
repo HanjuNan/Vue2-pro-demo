@@ -77,7 +77,25 @@ export default {
                 user: this.ruleForm.username,
                 pwd: this.ruleForm.password
             }).then( res => {
-                console.log(res);
+                console.log("res = ",res);
+                /**
+                 * 登录成功
+                 * 1.保存token到本地
+                 * 2.跳转到首页
+                 * 3.存储登录状态给 vuex
+                */
+               // 保存token到本地
+               localStorage.setItem("token", res.token);
+               // 跳转到首页
+               this.$router.push("/");
+               // 存储登录信息到vuex
+               let obj = {
+                  user: res.user,
+                  token: res.token,
+                  isLogin: true
+               }
+               this.$store.commit('LoginModule/setUserinfo', obj)
+
             })
         } else {
           console.log("error submit!!");

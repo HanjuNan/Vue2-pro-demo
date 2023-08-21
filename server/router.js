@@ -16,6 +16,8 @@ router.get("/", (req, res) => {
 
 // 登录接口
 router.post("/login", (req, res) => {
+    console.log("req = ",req);
+    console.log("req.body = ",req.body);
     let user = req.body.user
     let pwd = req.body.pwd
     // 连接数据库查询语句,看数据是否存在
@@ -26,7 +28,8 @@ router.post("/login", (req, res) => {
     }, secret.key)
     res.send({
         success: true,
-        token: token
+        token: token,
+        user
     })
 })
 

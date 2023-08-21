@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Layout from '../views/Layout.vue'
-
+import store from "../store"
 
 Vue.use(VueRouter)
 
@@ -50,7 +50,7 @@ const router = new VueRouter({
 
 
 router.beforeEach((to, from, next) => {
-  let token = false;
+  let token = store.state.LoginModule.userinfo.isLogin;
   // 登录验证: 1.进入路由界面是否需要登录 2.再验证是否登录
   if (to.meta.isLogin) { // true需要登录
       // 再验证是否登录 假设已经登录
