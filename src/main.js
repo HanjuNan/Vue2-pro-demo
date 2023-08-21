@@ -13,11 +13,12 @@ Vue.config.productionTip = false
 Vue.use(ElementUI);
 
 // 进入项目 获取本地是否有存储信息token
-let token = localStorage.getItem("token");
-if (token) {
+let usertoken = localStorage.getItem("usertoken");
+if (usertoken) {
+  let obj = JSON.parse(usertoken)
   store.commit('LoginModule/setUserinfo', {
-      user: '',
-      token,
+      user: obj.user,
+      token: obj.token,
       isLogin: true
   })
 }
@@ -28,3 +29,6 @@ new Vue({
   store,
   render: h => h(App)
 }).$mount('#app')
+
+
+

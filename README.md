@@ -44,7 +44,7 @@ vue + vuex + vue-router + element ui + axios
 ## 后台服务
 1. node.js express mysql
 2. 后台返回token: jsonwebtoken
-3. 
+3. 前台请求,配置代理跨域
 
 
 ## Project setup

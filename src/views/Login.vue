@@ -85,7 +85,11 @@ export default {
                  * 3.存储登录状态给 vuex
                 */
                // 保存token到本地
-               localStorage.setItem("token", res.token);
+               let data = {
+                  token: res.token,
+                  user: res.user
+               }
+               localStorage.setItem("usertoken", JSON.stringify(data));
                // 跳转到首页
                this.$router.push("/");
                // 存储登录信息到vuex

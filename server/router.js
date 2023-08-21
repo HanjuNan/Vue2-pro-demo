@@ -25,7 +25,7 @@ router.post("/login", (req, res) => {
     let token = jwt.sign({
         id: 123,
         user,
-    }, secret.key)
+    }, secret.key, { expiresIn: 20*1 })
     res.send({
         success: true,
         token: token,
@@ -33,6 +33,59 @@ router.post("/login", (req, res) => {
     })
 })
 
+// 测试token接口
+// 获取我的个人信息数据--验证token是否有效
+router.post('/tokenList', (req, res) => {
+    let token = req.headers.authorization;
+    console.log("=========================");
+    console.log(req.headers);
+    console.log("=========================");
+
+    console.log(token.toString());
+    console.log("用户带的token = ",token);
+    if (token) {
+        jwt.verify(token, secret.key, (err, decoded) => {
+            if (err) {
+                switch (err.name) {
+                    case 'TokenExpiredError':
+                        res.send({
+                            status: 403,
+                            success: false,
+                            msg: 'token过期'
+                        })
+                        break;
+                    case 'JsonWebTokenError':
+                        re.send({
+                            status: 403,
+                            success: false,
+                            msg: 'token无效'
+                        })
+                        break;
+                    default:
+                        res.send({
+                            status: 403,
+                            success: false,
+                            msg: 'token无效'
+                        })
+                        break;
+                }
+            } else {
+                res.send({
+                    status: 200,
+                    success: true,
+                    msg: 'token有效',
+                    result: [1,2,3,4]
+                })
+            }
+        })
+    } else {
+        res.send({
+            success: false,
+            msg: 'token无效'
+        })
+    }
+
+})
 
 module.exports = router
 
