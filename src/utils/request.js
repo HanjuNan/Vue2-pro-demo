@@ -4,7 +4,7 @@ import qs from "qs"
 
 // 1、配置基础路径和超时时间
 const instance = Axios.create({
-    // baseURL: 'http://localhost:3434/',
+    baseURL: '/api',
     timeout: 5000
 })
 
@@ -14,7 +14,11 @@ const instance = Axios.create({
 instance.interceptors.request.use(config => {
     console.log("请求的config = ", config);
     // 功能: 如果是post请求 处理发送的参数
-    if (config.method === 'POST') {
+    console.log("config.data = ", config.data);
+    console.log("qs.stringify(config.data) = ",qs.stringify(config.data));
+    console.log("config.method = ", config.method);
+    if (config.method === 'post') {
+        
         config.data = qs.stringify(config.data)
     }
 

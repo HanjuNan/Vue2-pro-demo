@@ -77,7 +77,7 @@ export default {
                 user: this.ruleForm.username,
                 pwd: this.ruleForm.password
             }).then( res => {
-                console.log("res = " + res);
+                console.log(res);
             })
         } else {
           console.log("error submit!!");
