@@ -37,6 +37,7 @@
 </template>
 
 <script>
+import { getLogin } from "../api/index"
 export default {
   data() {
    
@@ -69,8 +70,15 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-            console.log("valid = " + valid);
-            console.log(this.ruleForm);
+            // console.log("valid = " + valid);
+            // console.log(this.ruleForm);
+            // 方法1: 网络登录-请求
+            getLogin({
+                user: this.ruleForm.username,
+                pwd: this.ruleForm.password
+            }).then( res => {
+                console.log("res = " + res);
+            })
         } else {
           console.log("error submit!!");
           return false;
