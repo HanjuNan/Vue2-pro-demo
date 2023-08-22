@@ -38,6 +38,7 @@
 
 <script>
 import { getLogin } from "../api/index"
+import jwtDecode from "jwt-decode"
 export default {
   data() {
    
@@ -78,6 +79,7 @@ export default {
                 pwd: this.ruleForm.password
             }).then( res => {
                 console.log("res = ",res);
+                console.log("解析好的token ", jwtDecode(res.token));
                 /**
                  * 登录成功
                  * 1.保存token到本地
