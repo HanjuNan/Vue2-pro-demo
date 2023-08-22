@@ -39,7 +39,7 @@ vue + vuex + vue-router + element ui + axios
     import './element-variables.scss'
 
     Vue.use(Element)
-
+2. 轮播图
 
 ## 后台服务
 1. node.js express mysql

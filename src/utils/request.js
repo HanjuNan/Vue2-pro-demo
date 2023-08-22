@@ -4,7 +4,7 @@ import qs from "qs"
 import store from "../store"
 // 1、配置基础路径和超时时间
 const instance = Axios.create({
-    baseURL: '/api',
+    baseURL: '/foo',
     timeout: 10000
 })
 
